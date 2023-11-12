@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.model.menu.Menus;
+import christmas.model.menu.OrderMenus;
 
 public class OutputView {
     private static final String WELCOME_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -16,9 +16,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printMenus(Menus menus) {
+    public static void printMenus(OrderMenus orderMenus) {
         System.out.println(MENU_MESSAGE);
-        System.out.println(menus);
+        System.out.println(orderMenus);
     }
 
     public static void printErrorMessage(String errorMessage) {

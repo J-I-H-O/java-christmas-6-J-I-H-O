@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Menus {
+public class OrderMenus {
     private static final String DUPLICATE_MENU_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String MAX_MENU_SIZE_ERROR_MESSAGE = "[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.";
     private static final int MAX_MENU_SIZE = 20;
@@ -12,7 +12,7 @@ public class Menus {
     private List<Menu> menus = null;    // null을 허용한 대신 public 메서드를 제공하지 않아 NPE 방지
     private int totalMenuSize = 0;
 
-    public Menus(String menuInput) {
+    public OrderMenus(String menuInput) {
         menus = new ArrayList<>();  // IllegalArgumentException 발생 시 이전까지 넣은 Menu들을 모두 초기화 하기 위함
         List<String> menuStrings = splitMenuInput(menuInput);
         menuStrings.forEach(menuString -> {

@@ -1,7 +1,8 @@
 package christmas.controller;
 
+import christmas.model.Order;
 import christmas.model.VisitingDate;
-import christmas.model.menu.Menus;
+import christmas.model.menu.OrderMenus;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -11,9 +12,9 @@ public class EventController {
         OutputView.printWelcomeMessage();
 
         VisitingDate visitingDate = getVisitingDate();
-        Menus menus = getMenus();
+        OrderMenus orderMenus = getOrderMenus();
 
-        OutputView.printMenus(menus);
+        OutputView.printMenus(orderMenus);
     }
 
     private VisitingDate getVisitingDate() {
@@ -26,13 +27,14 @@ public class EventController {
         }
     }
 
-    private Menus getMenus() {
+    private OrderMenus getOrderMenus() {
         try {
-            String menuInput = InputView.readMenu();
-            return new Menus(menuInput);
+            String orderInput = InputView.readOrder();
+            Order.validateOrder(orderInput);
+            return new OrderMenus(orderInput);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
-            return getMenus();
+            return getOrderMenus();
         }
     }
 }
