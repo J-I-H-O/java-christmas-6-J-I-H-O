@@ -1,5 +1,7 @@
 package christmas.model.menu;
 
+import java.util.Arrays;
+
 public enum MenuInfo {
     MUSHROOM_SOUP("양송이수프", "appetizer", 6000),
     TAPAS("타파스", "appetizer", 5500),
@@ -22,5 +24,10 @@ public enum MenuInfo {
         this.name = name;
         this.type = type;
         this.price = price;
+    }
+
+    public static boolean isContained(String name) {
+        return Arrays.stream(values())
+                .anyMatch(menuInfo -> menuInfo.name.equals(name));
     }
 }
