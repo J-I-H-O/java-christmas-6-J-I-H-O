@@ -20,4 +20,8 @@ public class OutputView {
         System.out.println(MENU_MESSAGE);
         System.out.println(menus);
     }
+
+    public static void printErrorMessage(String errorMessage) {
+        System.out.println(errorMessage);
+    }
 }
