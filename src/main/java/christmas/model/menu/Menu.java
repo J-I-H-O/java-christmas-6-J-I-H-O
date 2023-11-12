@@ -17,4 +17,14 @@ public class Menu {
     public int getOrderQuantity() {
         return quantity.getQuantity();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(menuName.getName())
+                .append(" ")
+                .append(quantity.getQuantity())
+                .append("개");
+        return stringBuilder.toString();
+    }
 }

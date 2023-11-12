@@ -61,4 +61,11 @@ public class Menus {
         totalMenuSize += menu.getOrderQuantity();
         menus.add(menu);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        menus.forEach(menu -> stringBuilder.append(menu).append("\n"));
+        return stringBuilder.toString();
+    }
 }
