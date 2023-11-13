@@ -14,6 +14,10 @@ public class VisitingDate {
         this.date = date;
     }
 
+    public int getDate() {
+        return date;
+    }
+
     private void validateNumeric(String dateInput) {
         try {
             Integer.parseInt(dateInput);

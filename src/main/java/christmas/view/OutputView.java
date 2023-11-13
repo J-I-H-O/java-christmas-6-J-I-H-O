@@ -19,6 +19,7 @@ public class OutputView {
     public static void printMenus(OrderMenus orderMenus) {
         System.out.println(MENU_MESSAGE);
         System.out.println(orderMenus);
+        System.out.println();
     }
 
     public static void printErrorMessage(String errorMessage) {

@@ -5,26 +5,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OrderMenus {
-    private static final String DUPLICATE_MENU_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
+    private static final String INVALID_MENU_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String MAX_MENU_SIZE_ERROR_MESSAGE = "[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.";
+    private static final String NO_SINGLE_ORDER_TYPE = "drink";
     private static final int MAX_MENU_SIZE = 20;
 
-    private List<Menu> menus = null;    // null을 허용한 대신 public 메서드를 제공하지 않아 NPE 방지
+    private List<OrderMenu> orderMenus = null;
     private int totalMenuSize = 0;
 
     public OrderMenus(String menuInput) {
-        menus = new ArrayList<>();  // IllegalArgumentException 발생 시 이전까지 넣은 Menu들을 모두 초기화 하기 위함
+        orderMenus = new ArrayList<>();
         List<String> menuStrings = splitMenuInput(menuInput);
         menuStrings.forEach(menuString -> {
-            Menu menu = new Menu(menuString);
+            OrderMenu orderMenu = new OrderMenu(menuString);
 
             String menuName = parseMenuName(menuString);
             int menuSize = parseMenuSize(menuString);
             validateDuplicateMenu(menuName);
             validateTotalMenuSize(menuSize);
 
-            addMenu(menu);
+            addMenu(orderMenu);
         });
+        validateDrinkOnly();
     }
 
     private List<String> splitMenuInput(String menuInput) {
@@ -43,11 +45,11 @@ public class OrderMenus {
     }
 
     private void validateDuplicateMenu(String menuName) {
-        boolean isDuplicate = menus.stream()
-                .anyMatch(menu -> menu.getOrderMenuName().equals(menuName));
+        boolean isDuplicate = orderMenus.stream()
+                .anyMatch(orderMenu -> orderMenu.getOrderMenuName().equals(menuName));
 
         if (isDuplicate) {
-            throw new IllegalArgumentException(DUPLICATE_MENU_ERROR_MESSAGE);
+            throw new IllegalArgumentException(INVALID_MENU_ERROR_MESSAGE);
         }
     }
 
@@ -57,15 +59,24 @@ public class OrderMenus {
         }
     }
 
-    private void addMenu(Menu menu) {
-        totalMenuSize += menu.getOrderQuantity();
-        menus.add(menu);
+    private void validateDrinkOnly() {
+        boolean isInValid = orderMenus.stream()
+                .allMatch(orderMenu -> orderMenu.getOrderMenuType().equals(NO_SINGLE_ORDER_TYPE));
+
+        if (isInValid) {
+            throw new IllegalArgumentException(INVALID_MENU_ERROR_MESSAGE);
+        }
+    }
+
+    private void addMenu(OrderMenu orderMenu) {
+        totalMenuSize += orderMenu.getOrderQuantity();
+        orderMenus.add(orderMenu);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        menus.forEach(menu -> stringBuilder.append(menu).append("\n"));
+        orderMenus.forEach(orderMenu -> stringBuilder.append(orderMenu).append("\n"));
         return stringBuilder.toString();
     }
 }

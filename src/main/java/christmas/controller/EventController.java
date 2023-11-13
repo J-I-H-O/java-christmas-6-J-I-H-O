@@ -14,6 +14,7 @@ public class EventController {
         VisitingDate visitingDate = getVisitingDate();
         OrderMenus orderMenus = getOrderMenus();
 
+        OutputView.printEventStartMessage(visitingDate.getDate());
         OutputView.printMenus(orderMenus);
     }
 
