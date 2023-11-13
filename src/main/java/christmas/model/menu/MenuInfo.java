@@ -1,8 +1,6 @@
 package christmas.model.menu;
 
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public enum MenuInfo {
     MUSHROOM_SOUP("양송이수프", "appetizer", 6000),
@@ -18,6 +16,7 @@ public enum MenuInfo {
     RED_WINE("레드와인", "drink", 60000),
     CHAMPAGNE("샴페인", "drink", 25000);
 
+    private static final String INVALID_INPUT_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private final String name;
     private final String type;
     private final int price;
@@ -28,18 +27,13 @@ public enum MenuInfo {
         this.price = price;
     }
 
-    public static boolean isContained(String name) {
-        return Arrays.stream(values())
-                .anyMatch(menuInfo -> menuInfo.name.equals(name));
-    }
-
     public static MenuInfo findMenuInfoByName(String name) {
         for (MenuInfo menuInfo : MenuInfo.values()) {
             if (menuInfo.name.equals(name)) {
                 return menuInfo;
             }
         }
-        return null;
+        throw new IllegalArgumentException(INVALID_INPUT_ERROR_MESSAGE);
     }
 
     public String getName() {

@@ -10,17 +10,18 @@ public class OrderMenus {
     private static final String NO_SINGLE_ORDER_TYPE = "drink";
     private static final int MAX_MENU_SIZE = 20;
 
-    private List<OrderMenu> orderMenus = null;
+    private final List<OrderMenu> orderMenus = new ArrayList<>();
     private int totalMenuSize = 0;
+    private int totalOrderPrice = 0;
 
     public OrderMenus(String menuInput) {
-        orderMenus = new ArrayList<>();
         List<String> menuStrings = splitMenuInput(menuInput);
         menuStrings.forEach(menuString -> {
             OrderMenu orderMenu = new OrderMenu(menuString);
 
-            String menuName = parseMenuName(menuString);
-            int menuSize = parseMenuSize(menuString);
+            String menuName = orderMenu.getOrderMenuName();
+            int menuSize = orderMenu.getOrderQuantity();
+
             validateDuplicateMenu(menuName);
             validateTotalMenuSize(menuSize);
 
@@ -32,16 +33,6 @@ public class OrderMenus {
     private List<String> splitMenuInput(String menuInput) {
         String[] split = menuInput.split(",");
         return Arrays.asList(split);
-    }
-
-    private String parseMenuName(String menuString) {
-        String[] split = menuString.split("-");
-        return split[0];
-    }
-
-    private int parseMenuSize(String menuString) {
-        String[] split = menuString.split("-");
-        return Integer.parseInt(split[1]);
     }
 
     private void validateDuplicateMenu(String menuName) {
@@ -70,7 +61,12 @@ public class OrderMenus {
 
     private void addMenu(OrderMenu orderMenu) {
         totalMenuSize += orderMenu.getOrderQuantity();
+        totalOrderPrice += orderMenu.getOrderPrice();
         orderMenus.add(orderMenu);
+    }
+
+    public int getTotalPrice() {
+        return totalOrderPrice;
     }
 
     @Override

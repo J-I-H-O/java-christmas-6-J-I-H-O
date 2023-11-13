@@ -5,6 +5,7 @@ public class OrderMenu {
 
     private final MenuInfo menuInfo;
     private final Quantity quantity;
+    private final int orderPrice;
 
     public OrderMenu(String menuString) {
         String[] split = menuString.split("-");
@@ -13,20 +14,14 @@ public class OrderMenu {
 
         validateNoInput(menuName);
         validateNoInput(quantity);
-        validateNotInMenu(menuName);
 
         this.menuInfo = MenuInfo.findMenuInfoByName(menuName);
         this.quantity = new Quantity(quantity);
+        this.orderPrice = this.menuInfo.getPrice() * this.quantity.getQuantity();
     }
 
     private void validateNoInput(String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException(INVALID_INPUT_ERROR_MESSAGE);
-        }
-    }
-
-    private void validateNotInMenu(String input) {
-        if (!MenuInfo.isContained(input)) {
             throw new IllegalArgumentException(INVALID_INPUT_ERROR_MESSAGE);
         }
     }
@@ -39,12 +34,12 @@ public class OrderMenu {
         return menuInfo.getType();
     }
 
-    public int getOrderMenuPrice() {
-        return menuInfo.getPrice();
-    }
-
     public int getOrderQuantity() {
         return quantity.getQuantity();
+    }
+
+    public int getOrderPrice() {
+        return orderPrice;
     }
 
     @Override

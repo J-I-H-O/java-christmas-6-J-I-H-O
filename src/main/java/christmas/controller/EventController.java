@@ -15,7 +15,8 @@ public class EventController {
         OrderMenus orderMenus = getOrderMenus();
 
         OutputView.printEventStartMessage(visitingDate.getDate());
-        OutputView.printMenus(orderMenus);
+        OutputView.printMenus(orderMenus.toString());
+        OutputView.printTotalPriceBeforeDiscount(orderMenus.getTotalPrice());
     }
 
     private VisitingDate getVisitingDate() {
