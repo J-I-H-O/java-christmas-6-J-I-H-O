@@ -1,7 +1,7 @@
 package christmas.controller;
 
-import christmas.model.Order;
-import christmas.model.VisitingDate;
+import christmas.model.common.Order;
+import christmas.model.common.VisitingDate;
 import christmas.model.menu.OrderMenus;
 import christmas.view.InputView;
 import christmas.view.OutputView;

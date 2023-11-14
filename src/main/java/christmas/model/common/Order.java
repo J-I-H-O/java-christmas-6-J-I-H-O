@@ -1,4 +1,4 @@
-package christmas.model;
+package christmas.model.common;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

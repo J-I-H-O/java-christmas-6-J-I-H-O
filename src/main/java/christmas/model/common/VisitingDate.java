@@ -1,4 +1,4 @@
-package christmas.model;
+package christmas.model.common;
 
 public class VisitingDate {
     private static final String NOT_NUMERIC_ERROR_MESSAGE = "[ERROR] 숫자만 입력할 수 있습니다.";
