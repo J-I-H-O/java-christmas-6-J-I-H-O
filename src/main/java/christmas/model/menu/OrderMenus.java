@@ -8,7 +8,9 @@ public class OrderMenus {
     private static final String INVALID_MENU_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String MAX_MENU_SIZE_ERROR_MESSAGE = "[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.";
     private static final String NO_SINGLE_ORDER_TYPE = "drink";
+    private static final String DESSERT_TYPE = "dessert";
     private static final int MAX_MENU_SIZE = 20;
+    private static final int MIN_AMOUNT_FOR_DISCOUNT = 10000;
 
     private final List<OrderMenu> orderMenus = new ArrayList<>();
     private int totalMenuSize = 0;
@@ -28,11 +30,6 @@ public class OrderMenus {
             addMenu(orderMenu);
         });
         validateDrinkOnly();
-    }
-
-    private List<String> splitMenuInput(String menuInput) {
-        String[] split = menuInput.split(",");
-        return Arrays.asList(split);
     }
 
     private void validateDuplicateMenu(String menuName) {
@@ -59,10 +56,26 @@ public class OrderMenus {
         }
     }
 
+    public int countDessert() {
+        long count = orderMenus.stream()
+                .filter(orderMenu -> orderMenu.getOrderMenuType().equals(DESSERT_TYPE))
+                .count();
+        return Long.valueOf(count).intValue();
+    }
+
+    public boolean isDiscountable() {
+        return MIN_AMOUNT_FOR_DISCOUNT <= totalOrderPrice;
+    }
+
     private void addMenu(OrderMenu orderMenu) {
         totalMenuSize += orderMenu.getOrderQuantity();
         totalOrderPrice += orderMenu.getOrderPrice();
         orderMenus.add(orderMenu);
+    }
+
+    private List<String> splitMenuInput(String menuInput) {
+        String[] split = menuInput.split(",");
+        return Arrays.asList(split);
     }
 
     public int getTotalPrice() {
