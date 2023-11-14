@@ -3,6 +3,9 @@ package christmas.model.discount;
 import christmas.model.common.VisitingDate;
 import christmas.model.menu.OrderMenus;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class DiscountGenerator {
     private static final String D_DAY_EVENT_NAME = "크리스마스 디데이 할인";
     private static final int D_DAY_EVENT_END_DATE = 25;
@@ -11,6 +14,9 @@ public class DiscountGenerator {
     private static final String WEEKDAY_EVENT_NAME = "평일 할인";
     private static final String WEEKEND_EVENT_NAME = "주말 할인";
     private static final int WEEKDAY_WEEKEND_DISCOUNT_AMOUNT = 2023;
+    private static final String SPECIAL_EVENT_NAME = "특별 할인";
+    private static final int SPECIAL_DISCOUNT_AMOUNT = 1000;
+
 
     public static Discount generateDDayDiscount(int date) {
         if (D_DAY_EVENT_END_DATE < date) {
@@ -36,9 +42,11 @@ public class DiscountGenerator {
         return new Discount(WEEKEND_EVENT_NAME, discountAmount);
     }
 
-    public static Discount generateSpecialDiscount(OrderMenus orderMenus) {
-        // TODO: 구현
-        return null;
+    public static Discount generateSpecialDiscount(VisitingDate visitingDate) {
+        if (!visitingDate.isSpecialDay()) {
+            return null;
+        }
+        return new Discount(SPECIAL_EVENT_NAME, SPECIAL_DISCOUNT_AMOUNT);
     }
 
     public static Discount generateGiveawayDiscount(OrderMenus orderMenus) {

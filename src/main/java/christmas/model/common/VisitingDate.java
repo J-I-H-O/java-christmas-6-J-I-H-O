@@ -1,6 +1,8 @@
 package christmas.model.common;
 
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 public class VisitingDate {
     private static final String NOT_NUMERIC_ERROR_MESSAGE = "[ERROR] 숫자만 입력할 수 있습니다.";
@@ -9,6 +11,7 @@ public class VisitingDate {
     private static final int END_DATE_OF_MONTH = 31;
     private static final int EVENT_YEAR = 2023;
     private static final int EVENT_MONTH = 12;
+    private static final List<Integer> SPECIAL_EVENT_DATES = Arrays.asList(new Integer[]{3, 10, 17, 24, 25, 31});
 
     private final int date;
 
@@ -40,6 +43,10 @@ public class VisitingDate {
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
         return (dayOfWeek == Calendar.FRIDAY || dayOfWeek == Calendar.SATURDAY);
+    }
+
+    public boolean isSpecialDay() {
+        return SPECIAL_EVENT_DATES.contains(date);
     }
 
     public int getDate() {
