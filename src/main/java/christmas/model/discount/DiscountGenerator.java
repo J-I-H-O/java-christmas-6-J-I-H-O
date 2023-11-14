@@ -9,6 +9,7 @@ public class DiscountGenerator {
     private static final int D_DAY_EVENT_START_AMOUNT = 1000;
     private static final int D_DAY_EVENT_CUMULATIVE_AMOUNT = 100;
     private static final String WEEKDAY_EVENT_NAME = "평일 할인";
+    private static final String WEEKEND_EVENT_NAME = "주말 할인";
     private static final int WEEKDAY_WEEKEND_DISCOUNT_AMOUNT = 2023;
 
     public static Discount generateDDayDiscount(int date) {
@@ -20,16 +21,19 @@ public class DiscountGenerator {
     }
 
     public static Discount generateWeekdayDiscount(VisitingDate visitingDate, OrderMenus orderMenus) {
-        int discountAmount = WEEKDAY_WEEKEND_DISCOUNT_AMOUNT * orderMenus.countDessert();
+        int discountAmount = WEEKDAY_WEEKEND_DISCOUNT_AMOUNT * orderMenus.countDessertMenus();
         if (visitingDate.isWeekend() || discountAmount == 0) {
             return null;
         }
         return new Discount(WEEKDAY_EVENT_NAME, discountAmount);
     }
 
-    public static Discount generateWeekendDiscount(int date, OrderMenus orderMenus) {
-        // TODO: 구현
-        return null;
+    public static Discount generateWeekendDiscount(VisitingDate visitingDate, OrderMenus orderMenus) {
+        int discountAmount = WEEKDAY_WEEKEND_DISCOUNT_AMOUNT * orderMenus.countMainMenus();
+        if (!visitingDate.isWeekend() || discountAmount == 0) {
+            return null;
+        }
+        return new Discount(WEEKEND_EVENT_NAME, discountAmount);
     }
 
     public static Discount generateSpecialDiscount(OrderMenus orderMenus) {

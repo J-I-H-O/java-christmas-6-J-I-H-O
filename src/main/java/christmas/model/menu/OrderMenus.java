@@ -9,6 +9,7 @@ public class OrderMenus {
     private static final String MAX_MENU_SIZE_ERROR_MESSAGE = "[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다.";
     private static final String NO_SINGLE_ORDER_TYPE = "drink";
     private static final String DESSERT_TYPE = "dessert";
+    private static final String MAIN_TYPE = "main";
     private static final int MAX_MENU_SIZE = 20;
     private static final int MIN_AMOUNT_FOR_DISCOUNT = 10000;
 
@@ -56,9 +57,16 @@ public class OrderMenus {
         }
     }
 
-    public int countDessert() {
+    public int countDessertMenus() {
         long count = orderMenus.stream()
                 .filter(orderMenu -> orderMenu.getOrderMenuType().equals(DESSERT_TYPE))
+                .count();
+        return Long.valueOf(count).intValue();
+    }
+
+    public int countMainMenus() {
+        long count = orderMenus.stream()
+                .filter(orderMenu -> orderMenu.getOrderMenuType().equals(MAIN_TYPE))
                 .count();
         return Long.valueOf(count).intValue();
     }
