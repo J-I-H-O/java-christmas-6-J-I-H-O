@@ -11,12 +11,17 @@ public class DiscountGenerator {
     private static final int D_DAY_EVENT_END_DATE = 25;
     private static final int D_DAY_EVENT_START_AMOUNT = 1000;
     private static final int D_DAY_EVENT_CUMULATIVE_AMOUNT = 100;
+
     private static final String WEEKDAY_EVENT_NAME = "평일 할인";
     private static final String WEEKEND_EVENT_NAME = "주말 할인";
     private static final int WEEKDAY_WEEKEND_DISCOUNT_AMOUNT = 2023;
+
     private static final String SPECIAL_EVENT_NAME = "특별 할인";
     private static final int SPECIAL_DISCOUNT_AMOUNT = 1000;
 
+    private static final String GIVEAWAY_EVENT_NAME = "증정 이벤트";
+    private static final int GIVEAWAY_MIN_CRITERIA = 120000;
+    private static final int GIVEAWAY_DISCOUNT_AMOUNT = 25000;
 
     public static Discount generateDDayDiscount(int date) {
         if (D_DAY_EVENT_END_DATE < date) {
@@ -50,7 +55,9 @@ public class DiscountGenerator {
     }
 
     public static Discount generateGiveawayDiscount(OrderMenus orderMenus) {
-        // TODO: 구현
-        return null;
+        if (orderMenus.getTotalPrice() < GIVEAWAY_MIN_CRITERIA) {
+            return null;
+        }
+        return new Discount(GIVEAWAY_EVENT_NAME, GIVEAWAY_DISCOUNT_AMOUNT);
     }
 }
