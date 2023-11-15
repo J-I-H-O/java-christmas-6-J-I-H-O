@@ -9,12 +9,12 @@ import java.util.List;
 public class AppliedDiscounts {
     private static final String GIVEAWAY_EVENT_NAME = "증정 이벤트";
     private static final int GIVEAWAY_DISCOUNT_AMOUNT = 25000;
-    private static final String NO_GIFT_NAME = "없음";
+    private static final String NOTHING = "없음";
     private static final String GIFT_NAME = "샴페인 1개";
 
     private final List<Discount> discounts = new ArrayList<>();
     private int totalBenefitAmount = 0;
-    private String giftName = NO_GIFT_NAME;
+    private String giftName = NOTHING;
 
     public AppliedDiscounts(VisitingDate date, OrderMenus menus) {
         addDiscount(DiscountGenerator.generateDDayDiscount(date));
@@ -36,7 +36,7 @@ public class AppliedDiscounts {
     }
 
     public boolean isGiftExists() {
-        return !giftName.equals(NO_GIFT_NAME);
+        return !giftName.equals(NOTHING);
     }
 
     public int getTotalBenefitAmount() {
@@ -56,6 +56,10 @@ public class AppliedDiscounts {
 
     @Override
     public String toString() {
+        if (discounts.isEmpty()) {
+            return NOTHING;
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
         discounts.forEach(discount -> {
             stringBuilder

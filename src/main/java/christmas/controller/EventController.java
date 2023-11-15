@@ -20,6 +20,7 @@ public class EventController {
         OutputView.printMenus(orderMenus.toString());
         OutputView.printTotalPriceBeforeDiscount(orderMenus.getTotalPrice());
         OutputView.printGift(appliedDiscounts);
+        OutputView.printDiscounts(appliedDiscounts);
     }
 
     private VisitingDate getVisitingDate() {
