@@ -6,7 +6,7 @@ import java.util.List;
 
 public class VisitingDate {
     private static final String INVALID_DATE_ERROR_MESSAGE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
-    private static final List<Integer> SPECIAL_EVENT_DATES = Arrays.asList(new Integer[]{3, 10, 17, 24, 25, 31});
+    private static final List<Integer> SPECIAL_EVENT_DATES = Arrays.asList(3, 10, 17, 24, 25, 31);
     private static final int START_DATE_OF_MONTH = 1;
     private static final int END_DATE_OF_MONTH = 31;
     private static final int EVENT_YEAR = 2023;
