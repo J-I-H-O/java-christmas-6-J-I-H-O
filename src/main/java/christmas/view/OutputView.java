@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.model.discount.AppliedDiscounts;
 import christmas.model.menu.OrderMenus;
 import christmas.utils.Formatter;
 
@@ -10,6 +11,7 @@ public class OutputView {
     private static final String EVENT_START_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String MENU_MESSAGE = "<주문 메뉴>";
     private static final String TOTAL_PRICE_BEFORE_DISCOUNT_MESSAGE = "<할인 전 총주문 금액>";
+    private static final String GIVEAWAY_MENU_MESSAGE = "<증정 메뉴>";
 
     public static void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
@@ -28,6 +30,12 @@ public class OutputView {
     public static void printTotalPriceBeforeDiscount(int price) {
         System.out.println(TOTAL_PRICE_BEFORE_DISCOUNT_MESSAGE);
         System.out.println(Formatter.formatToCurrencyWon(price));
+        System.out.println();
+    }
+
+    public static void printGift(AppliedDiscounts appliedDiscounts) {
+        System.out.println(GIVEAWAY_MENU_MESSAGE);
+        System.out.println(appliedDiscounts.getGiftName());
         System.out.println();
     }
 

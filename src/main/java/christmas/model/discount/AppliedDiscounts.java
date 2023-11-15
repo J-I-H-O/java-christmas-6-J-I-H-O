@@ -9,10 +9,12 @@ import java.util.List;
 public class AppliedDiscounts {
     private static final String GIVEAWAY_EVENT_NAME = "증정 이벤트";
     private static final int GIVEAWAY_DISCOUNT_AMOUNT = 25000;
+    private static final String NO_GIFT_NAME = "없음";
+    private static final String GIFT_NAME = "샴페인 1개";
 
     private final List<Discount> discounts = new ArrayList<>();
     private int totalBenefitAmount = 0;
-    private boolean isGiftExists = false;
+    private String giftName = NO_GIFT_NAME;
 
     public AppliedDiscounts(VisitingDate date, OrderMenus menus) {
         addDiscount(DiscountGenerator.generateDDayDiscount(date));
@@ -22,25 +24,44 @@ public class AppliedDiscounts {
         addDiscount(DiscountGenerator.generateGiveawayDiscount(menus));
     }
 
-    public int getTotalBenefitAmount() {
-        return totalBenefitAmount;
-    }
-
-    public int getTotalDiscountAmount() {
-        if (isGiftExists) {
-            return totalBenefitAmount - GIVEAWAY_DISCOUNT_AMOUNT;
-        }
-        return totalBenefitAmount;
-    }
-
     private void addDiscount(Discount discount) {
         if (discount == null) {
             return;
         }
         if (discount.getName().equals(GIVEAWAY_EVENT_NAME)) {
-            isGiftExists = true;
+            giftName = GIFT_NAME;
         }
         totalBenefitAmount += discount.getAmount();
         discounts.add(discount);
+    }
+
+    public boolean isGiftExists() {
+        return !giftName.equals(NO_GIFT_NAME);
+    }
+
+    public int getTotalBenefitAmount() {
+        return totalBenefitAmount;
+    }
+
+    public int getTotalDiscountAmount() {
+        if (isGiftExists()) {
+            return totalBenefitAmount - GIVEAWAY_DISCOUNT_AMOUNT;
+        }
+        return totalBenefitAmount;
+    }
+
+    public String getGiftName() {
+        return giftName;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        discounts.forEach(discount -> {
+            stringBuilder
+                    .append(discount)
+                    .append("\n");
+        });
+        return stringBuilder.toString();
     }
 }

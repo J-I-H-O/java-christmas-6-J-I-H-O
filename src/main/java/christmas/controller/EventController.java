@@ -2,6 +2,7 @@ package christmas.controller;
 
 import christmas.model.common.Order;
 import christmas.model.common.VisitingDate;
+import christmas.model.discount.AppliedDiscounts;
 import christmas.model.menu.OrderMenus;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -13,10 +14,12 @@ public class EventController {
 
         VisitingDate visitingDate = getVisitingDate();
         OrderMenus orderMenus = getOrderMenus();
+        AppliedDiscounts appliedDiscounts = new AppliedDiscounts(visitingDate, orderMenus);
 
         OutputView.printEventStartMessage(visitingDate.getDate());
         OutputView.printMenus(orderMenus.toString());
         OutputView.printTotalPriceBeforeDiscount(orderMenus.getTotalPrice());
+        OutputView.printGift(appliedDiscounts);
     }
 
     private VisitingDate getVisitingDate() {
