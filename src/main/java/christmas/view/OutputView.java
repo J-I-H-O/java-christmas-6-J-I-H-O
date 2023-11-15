@@ -48,21 +48,21 @@ public class OutputView {
     }
 
     public static void printTotalBenefitAmount(AppliedDiscounts appliedDiscounts) {
-        int amount = -appliedDiscounts.getTotalBenefitAmount();
+        int amount = -appliedDiscounts.calculateTotalBenefitAmount();
         System.out.println(TOTAL_BENEFIT_AMOUNT_MESSAGE);
         System.out.println(Formatter.formatToCurrencyWon(amount));
         System.out.println();
     }
 
     public static void printTotalPrice(OrderMenus orderMenus, AppliedDiscounts appliedDiscounts) {
-        int price = appliedDiscounts.getFinalTotalPrice(orderMenus);
+        int price = appliedDiscounts.calculateFinalTotalPrice(orderMenus);
         System.out.println(TOTAL_PRICE_AFTER_DISCOUNT_MESSAGE);
         System.out.println(Formatter.formatToCurrencyWon(price));
         System.out.println();
     }
 
     public static void printEventBadge(AppliedDiscounts appliedDiscounts) {
-        int benefitAmount = appliedDiscounts.getTotalBenefitAmount();
+        int benefitAmount = appliedDiscounts.calculateTotalBenefitAmount();
         String badge = EventBadges.findBadgeNameByDiscountAmount(benefitAmount);
         System.out.println(EVENT_BADGE_MESSAGE);
         System.out.println(badge);

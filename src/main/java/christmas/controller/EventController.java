@@ -15,14 +15,7 @@ public class EventController {
         OrderMenus orderMenus = getOrderMenus();
         AppliedDiscounts appliedDiscounts = new AppliedDiscounts(visitingDate, orderMenus);
 
-        OutputView.printEventStartMessage(visitingDate.getDate());
-        OutputView.printMenus(orderMenus.toString());
-        OutputView.printTotalPriceBeforeDiscount(orderMenus.getTotalPrice());
-        OutputView.printGift(appliedDiscounts);
-        OutputView.printDiscounts(appliedDiscounts);
-        OutputView.printTotalBenefitAmount(appliedDiscounts);
-        OutputView.printTotalPrice(orderMenus, appliedDiscounts);
-        OutputView.printEventBadge(appliedDiscounts);
+        printResult(visitingDate, orderMenus, appliedDiscounts);
     }
 
     private VisitingDate getVisitingDate() {
@@ -44,5 +37,16 @@ public class EventController {
             OutputView.printErrorMessage(e.getMessage());
             return getOrderMenus();
         }
+    }
+
+    private void printResult(VisitingDate visitingDate, OrderMenus orderMenus, AppliedDiscounts appliedDiscounts) {
+        OutputView.printEventStartMessage(visitingDate.getDate());
+        OutputView.printMenus(orderMenus.toString());
+        OutputView.printTotalPriceBeforeDiscount(orderMenus.getTotalPrice());
+        OutputView.printGift(appliedDiscounts);
+        OutputView.printDiscounts(appliedDiscounts);
+        OutputView.printTotalBenefitAmount(appliedDiscounts);
+        OutputView.printTotalPrice(orderMenus, appliedDiscounts);
+        OutputView.printEventBadge(appliedDiscounts);
     }
 }

@@ -1,7 +1,5 @@
 package christmas.model.menu;
 
-import java.util.Arrays;
-
 public enum MenuInfo {
     MUSHROOM_SOUP("양송이수프", "appetizer", 6000),
     TAPAS("타파스", "appetizer", 5500),

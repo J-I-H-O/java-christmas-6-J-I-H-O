@@ -41,23 +41,20 @@ public class AppliedDiscounts {
         return !giftName.equals(NOTHING);
     }
 
-    public int getTotalBenefitAmount() {
+    public int calculateTotalBenefitAmount() {
         return totalBenefitAmount;
     }
 
-    public int getTotalDiscountAmount() {
+    public int calculateTotalDiscountAmount() {
         if (isGiftExists()) {
             return totalBenefitAmount - GIVEAWAY_DISCOUNT_AMOUNT;
         }
         return totalBenefitAmount;
     }
 
-    public int getFinalTotalPrice(OrderMenus orderMenus) {
-        int price = orderMenus.getTotalPrice() - getTotalDiscountAmount();
-        if (price < 0) {
-            return 0;
-        }
-        return price;
+    public int calculateFinalTotalPrice(OrderMenus orderMenus) {
+        int price = orderMenus.getTotalPrice() - calculateTotalDiscountAmount();
+        return Math.max(0, price);
     }
 
     public String getGiftName() {
@@ -71,11 +68,10 @@ public class AppliedDiscounts {
         }
 
         StringBuilder stringBuilder = new StringBuilder();
-        discounts.forEach(discount -> {
-            stringBuilder
-                    .append(discount)
-                    .append("\n");
-        });
+        discounts.forEach(discount -> stringBuilder
+                .append(discount)
+                .append("\n")
+        );
         return stringBuilder.toString();
     }
 }
