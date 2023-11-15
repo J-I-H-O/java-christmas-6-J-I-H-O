@@ -3,9 +3,6 @@ package christmas.model.discount;
 import christmas.model.common.VisitingDate;
 import christmas.model.menu.OrderMenus;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class DiscountGenerator {
     private static final String D_DAY_EVENT_NAME = "크리스마스 디데이 할인";
     private static final int D_DAY_EVENT_END_DATE = 25;
@@ -23,7 +20,11 @@ public class DiscountGenerator {
     private static final int GIVEAWAY_MIN_CRITERIA = 120000;
     private static final int GIVEAWAY_DISCOUNT_AMOUNT = 25000;
 
-    public static Discount generateDDayDiscount(int date) {
+    private DiscountGenerator() {
+    }
+
+    public static Discount generateDDayDiscount(VisitingDate visitingDate) {
+        int date = visitingDate.getDate();
         if (D_DAY_EVENT_END_DATE < date) {
             return null;
         }
