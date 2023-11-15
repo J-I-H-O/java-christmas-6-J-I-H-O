@@ -52,6 +52,14 @@ public class AppliedDiscounts {
         return totalBenefitAmount;
     }
 
+    public int getFinalTotalPrice(OrderMenus orderMenus) {
+        int price = orderMenus.getTotalPrice() - getTotalDiscountAmount();
+        if (price < 0) {
+            return 0;
+        }
+        return price;
+    }
+
     public String getGiftName() {
         return giftName;
     }

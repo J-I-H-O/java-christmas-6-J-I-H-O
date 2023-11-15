@@ -55,11 +55,7 @@ public class OutputView {
     }
 
     public static void printTotalPrice(OrderMenus orderMenus, AppliedDiscounts appliedDiscounts) {
-        int price = orderMenus.getTotalPrice() - appliedDiscounts.getTotalDiscountAmount();
-        if (price < 0) {
-            price = 0;
-        }
-
+        int price = appliedDiscounts.getFinalTotalPrice(orderMenus);
         System.out.println(TOTAL_PRICE_AFTER_DISCOUNT_MESSAGE);
         System.out.println(Formatter.formatToCurrencyWon(price));
         System.out.println();
