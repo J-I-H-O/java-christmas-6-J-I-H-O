@@ -17,11 +17,13 @@ public class AppliedDiscounts {
     private String giftName = NOTHING;
 
     public AppliedDiscounts(VisitingDate date, OrderMenus menus) {
-        addDiscount(DiscountGenerator.generateDDayDiscount(date));
-        addDiscount(DiscountGenerator.generateWeekdayDiscount(date, menus));
-        addDiscount(DiscountGenerator.generateWeekendDiscount(date, menus));
-        addDiscount(DiscountGenerator.generateSpecialDiscount(date));
-        addDiscount(DiscountGenerator.generateGiveawayDiscount(menus));
+        if (menus.isDiscountable()) {
+            addDiscount(DiscountGenerator.generateDDayDiscount(date));
+            addDiscount(DiscountGenerator.generateWeekdayDiscount(date, menus));
+            addDiscount(DiscountGenerator.generateWeekendDiscount(date, menus));
+            addDiscount(DiscountGenerator.generateSpecialDiscount(date));
+            addDiscount(DiscountGenerator.generateGiveawayDiscount(menus));
+        }
     }
 
     private void addDiscount(Discount discount) {
