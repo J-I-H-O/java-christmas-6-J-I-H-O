@@ -3,6 +3,7 @@ package christmas.model.menu;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderMenus {
     private static final String INVALID_MENU_ERROR_MESSAGE = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
@@ -58,17 +59,27 @@ public class OrderMenus {
     }
 
     public int countDessertMenus() {
-        long count = orderMenus.stream()
+        List<OrderMenu> result = orderMenus.stream()
                 .filter(orderMenu -> orderMenu.getOrderMenuType().equals(DESSERT_TYPE))
-                .count();
-        return Long.valueOf(count).intValue();
+                .toList();
+
+        int count = 0;
+        for (OrderMenu orderMenu : result) {
+            count += orderMenu.getOrderQuantity();
+        }
+        return count;
     }
 
     public int countMainMenus() {
-        long count = orderMenus.stream()
+        List<OrderMenu> result = orderMenus.stream()
                 .filter(orderMenu -> orderMenu.getOrderMenuType().equals(MAIN_TYPE))
-                .count();
-        return Long.valueOf(count).intValue();
+                .toList();
+
+        int count = 0;
+        for (OrderMenu orderMenu : result) {
+            count += orderMenu.getOrderQuantity();
+        }
+        return count;
     }
 
     public boolean isDiscountable() {
