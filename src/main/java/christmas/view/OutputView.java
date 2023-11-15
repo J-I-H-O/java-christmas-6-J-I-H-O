@@ -13,6 +13,8 @@ public class OutputView {
     private static final String TOTAL_PRICE_BEFORE_DISCOUNT_MESSAGE = "<할인 전 총주문 금액>";
     private static final String GIVEAWAY_MENU_MESSAGE = "<증정 메뉴>";
     private static final String DISCOUNT_LIST_MESSAGE = "<혜택 내역>";
+    private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "<총혜택 금액>";
+    private static final String TOTAL_PRICE_AFTER_DISCOUNT_MESSAGE = "<할인 후 예상 결제 금액>";
 
     public static void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
@@ -43,6 +45,20 @@ public class OutputView {
     public static void printDiscounts(AppliedDiscounts appliedDiscounts) {
         System.out.println(DISCOUNT_LIST_MESSAGE);
         System.out.println(appliedDiscounts);
+    }
+
+    public static void printTotalBenefitAmount(AppliedDiscounts appliedDiscounts) {
+        int amount = -appliedDiscounts.getTotalBenefitAmount();
+        System.out.println(TOTAL_BENEFIT_AMOUNT_MESSAGE);
+        System.out.println(Formatter.formatToCurrencyWon(amount));
+        System.out.println();
+    }
+
+    public static void printTotalPrice(OrderMenus orderMenus, AppliedDiscounts appliedDiscounts) {
+        int price = orderMenus.getTotalPrice() - appliedDiscounts.getTotalDiscountAmount();
+        System.out.println(TOTAL_PRICE_AFTER_DISCOUNT_MESSAGE);
+        System.out.println(Formatter.formatToCurrencyWon(price));
+        System.out.println();
     }
 
     public static void printErrorMessage(String errorMessage) {

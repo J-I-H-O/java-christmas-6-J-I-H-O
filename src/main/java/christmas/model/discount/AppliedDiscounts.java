@@ -59,7 +59,7 @@ public class AppliedDiscounts {
     @Override
     public String toString() {
         if (discounts.isEmpty()) {
-            return NOTHING;
+            return NOTHING + "\n";
         }
 
         StringBuilder stringBuilder = new StringBuilder();

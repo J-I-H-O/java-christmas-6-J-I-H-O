@@ -21,6 +21,8 @@ public class EventController {
         OutputView.printTotalPriceBeforeDiscount(orderMenus.getTotalPrice());
         OutputView.printGift(appliedDiscounts);
         OutputView.printDiscounts(appliedDiscounts);
+        OutputView.printTotalBenefitAmount(appliedDiscounts);
+        OutputView.printTotalPrice(orderMenus, appliedDiscounts);
     }
 
     private VisitingDate getVisitingDate() {
