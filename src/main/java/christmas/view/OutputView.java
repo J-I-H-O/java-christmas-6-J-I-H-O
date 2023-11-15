@@ -5,8 +5,6 @@ import christmas.model.discount.EventBadges;
 import christmas.model.menu.OrderMenus;
 import christmas.utils.Formatter;
 
-import java.text.DecimalFormat;
-
 public class OutputView {
     private static final String WELCOME_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
     private static final String EVENT_START_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
@@ -58,6 +56,10 @@ public class OutputView {
 
     public static void printTotalPrice(OrderMenus orderMenus, AppliedDiscounts appliedDiscounts) {
         int price = orderMenus.getTotalPrice() - appliedDiscounts.getTotalDiscountAmount();
+        if (price < 0) {
+            price = 0;
+        }
+
         System.out.println(TOTAL_PRICE_AFTER_DISCOUNT_MESSAGE);
         System.out.println(Formatter.formatToCurrencyWon(price));
         System.out.println();
