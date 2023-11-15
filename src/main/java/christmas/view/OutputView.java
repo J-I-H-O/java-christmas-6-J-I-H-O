@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.model.menu.OrderMenus;
+import christmas.utils.Formatter;
 
 import java.text.DecimalFormat;
 
@@ -9,7 +10,6 @@ public class OutputView {
     private static final String EVENT_START_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String MENU_MESSAGE = "<주문 메뉴>";
     private static final String TOTAL_PRICE_BEFORE_DISCOUNT_MESSAGE = "<할인 전 총주문 금액>";
-    private static final String PRICE_FORMAT = "#,###원";
 
     public static void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
@@ -27,8 +27,7 @@ public class OutputView {
 
     public static void printTotalPriceBeforeDiscount(int price) {
         System.out.println(TOTAL_PRICE_BEFORE_DISCOUNT_MESSAGE);
-        DecimalFormat format = new DecimalFormat(PRICE_FORMAT);
-        System.out.println(format.format(price));
+        System.out.println(Formatter.formatToCurrencyWon(price));
         System.out.println();
     }
 
