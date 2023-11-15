@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.model.discount.AppliedDiscounts;
+import christmas.model.discount.EventBadges;
 import christmas.model.menu.OrderMenus;
 import christmas.utils.Formatter;
 
@@ -15,6 +16,7 @@ public class OutputView {
     private static final String DISCOUNT_LIST_MESSAGE = "<혜택 내역>";
     private static final String TOTAL_BENEFIT_AMOUNT_MESSAGE = "<총혜택 금액>";
     private static final String TOTAL_PRICE_AFTER_DISCOUNT_MESSAGE = "<할인 후 예상 결제 금액>";
+    private static final String EVENT_BADGE_MESSAGE = "<12월 이벤트 배지>";
 
     public static void printWelcomeMessage() {
         System.out.println(WELCOME_MESSAGE);
@@ -59,6 +61,13 @@ public class OutputView {
         System.out.println(TOTAL_PRICE_AFTER_DISCOUNT_MESSAGE);
         System.out.println(Formatter.formatToCurrencyWon(price));
         System.out.println();
+    }
+
+    public static void printEventBadge(AppliedDiscounts appliedDiscounts) {
+        int benefitAmount = appliedDiscounts.getTotalBenefitAmount();
+        String badge = EventBadges.findBadgeNameByDiscountAmount(benefitAmount);
+        System.out.println(EVENT_BADGE_MESSAGE);
+        System.out.println(badge);
     }
 
     public static void printErrorMessage(String errorMessage) {

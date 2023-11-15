@@ -8,7 +8,6 @@ import christmas.view.InputView;
 import christmas.view.OutputView;
 
 public class EventController {
-
     public void run() {
         OutputView.printWelcomeMessage();
 
@@ -23,6 +22,7 @@ public class EventController {
         OutputView.printDiscounts(appliedDiscounts);
         OutputView.printTotalBenefitAmount(appliedDiscounts);
         OutputView.printTotalPrice(orderMenus, appliedDiscounts);
+        OutputView.printEventBadge(appliedDiscounts);
     }
 
     private VisitingDate getVisitingDate() {
